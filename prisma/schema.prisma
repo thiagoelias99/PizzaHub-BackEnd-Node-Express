@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Ingredient {
+  id          String               @id @default(uuid())
+  description String
+  value       Decimal
+  pizzas      PizzasXIngredients[]
+
+  @@map("ingredients")
+}
+
+model Pizza {
+  id          String               @id @default(uuid())
+  description String
+  value       Decimal
+  ingredients PizzasXIngredients[]
+
+  @@map("pizzas")
+}
+
+model PizzasXIngredients {
+  pizza        Pizza      @relation(fields: [pizzaId], references: [id])
+  pizzaId      String
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId String
+  createdAt    DateTime   @default(now())
+
+  @@id([pizzaId, ingredientId])
+  @@map("pizzas_ingredients")
+}
