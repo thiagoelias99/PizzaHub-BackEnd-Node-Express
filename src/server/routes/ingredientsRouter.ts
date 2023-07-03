@@ -4,12 +4,13 @@ import { IngredientController } from "../controllers/IngredientController";
 const router = Router();
 // const { RequestValidator, Authentication, AdminAuthentication } = require("../middlewares");
 // const { CourseController } = require("../controllers");
+import { postValidation } from "../middlewares/validation/IngredientValidation";
 
 
 const path = "/ingredients";
 
 router.route(path)
-    .post(IngredientController.post);
+    .post(postValidation, IngredientController.post);
 // .get(AdminAuthentication, CourseController.get);
 
 // router.route(`${path}/info`)
