@@ -1,0 +1,36 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "pizzahub-backend-node",
+    "dateExported": "2023-07-03T19:43:25.163Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "7f8b06d4-261a-4ecb-8420-0b57a8befc54",
+            "name": "Ingredient",
+            "containerId": "",
+            "created": "2023-07-02T23:20:20.244Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "74e54e43-058f-4553-8ad5-a51777ac8140",
+            "colId": "4cb6b0de-da49-4912-aa5a-c292243cfdb6",
+            "containerId": "7f8b06d4-261a-4ecb-8420-0b57a8befc54",
+            "name": "Post",
+            "url": "http://localhost:3333/ingredients",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-02T23:20:29.504Z",
+            "modified": "2023-07-03T00:20:56.511Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"description\": \"Presunto\",\n  \"value\": 59.99\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
