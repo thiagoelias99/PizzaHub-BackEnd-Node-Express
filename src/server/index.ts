@@ -8,7 +8,8 @@ dotenv.config();
 const server = express();
 const port = process.env.PORT || 3333;
 
-// const router = require("./routes");
+import { router } from "./routes/ingredientsRouter";
+// import { errorHandler } from "./middlewares";
 // const {
 //     errorHandler
 // } = require("./middlewares");
@@ -23,7 +24,7 @@ server.use(express.json());
 server.use(morgan("dev"));
 
 // Routing configuration
-// server.use(router);
+server.use(router);
 
 // Errors Handler middleware configuration
 // server.use(errorHandler);
