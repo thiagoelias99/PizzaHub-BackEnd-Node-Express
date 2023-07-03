@@ -3,7 +3,7 @@ import { validation } from "./validation";
 import { z } from "zod";
 import { RequestHandler } from "express";
 
-const postValidation: RequestHandler = validation((getSchema) => ({
+const bodyValidation: RequestHandler = validation((getSchema) => ({
     body: getSchema<IngredientCreate>(
         z.object({
             description: z.string().nonempty(),
@@ -12,7 +12,16 @@ const postValidation: RequestHandler = validation((getSchema) => ({
     ),
 }));
 
-export = {
-    postValidation
-}
+const paramsValidation: RequestHandler = validation((getSchema) => ({
+    params: getSchema<{ id: string }>(
+        z.object({
+            id: z.string().uuid()
+        })
+    ),
+}));
+
+export {
+    bodyValidation,
+    paramsValidation
+};
 

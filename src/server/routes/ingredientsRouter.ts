@@ -4,23 +4,20 @@ import { IngredientController } from "../controllers/IngredientController";
 const router = Router();
 // const { RequestValidator, Authentication, AdminAuthentication } = require("../middlewares");
 // const { CourseController } = require("../controllers");
-import { postValidation } from "../middlewares/validation/IngredientValidation";
+import { bodyValidation, paramsValidation } from "../middlewares/validation/IngredientValidation";
 
 
 const path = "/ingredients";
 
 router.route(path)
-    .post(postValidation, IngredientController.post);
-// .get(AdminAuthentication, CourseController.get);
+    .post(bodyValidation, IngredientController.post)
+    .get(IngredientController.getAll);
 
-// router.route(`${path}/info`)
-//     .get(Authentication, CourseController.getInfo)
-
-// router.route(`${path}/:uuid`)
-//     .all(RequestValidator.params)
-//     .get(AdminAuthentication, CourseController.getByUuid)
-//     .put(AdminAuthentication, RequestValidator.body, CourseController.put)
-//     .delete(AdminAuthentication, CourseController.del);
+router.route(`${path}/:id`)
+    .all(paramsValidation)
+    .get(IngredientController.getById)
+    .put(bodyValidation, IngredientController.put)
+    .delete(IngredientController.del);
 
 // router.route(`${path}/:uuid/subscribe`)
 //     .patch(Authentication, RequestValidator.params, CourseController.subscribe);
