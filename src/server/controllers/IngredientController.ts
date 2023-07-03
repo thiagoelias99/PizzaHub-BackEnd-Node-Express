@@ -2,15 +2,20 @@ import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 
 import { IngredientService } from "../services/IngredientService";
-import { IngredientCreate } from "../../models/Ingredient";
+import { IngredientCreate, IngredientQueryProps } from "../../models/Ingredient";
 const ingredientService = new IngredientService();
 
 class IngredientController {
-    static async post(req: Request<{}, IngredientCreate>, res: Response, next: NextFunction) {
+    static async post(req: Request<{}, {}, IngredientCreate>, res: Response, next: NextFunction) {
+        const { description, value } = req.body;
+        const ingredient: IngredientCreate = {
+            description,
+            value
+        };
         try {
-            const ingredient = await ingredientService.createRegister(req.body);
-            if (ingredient) {
-                res.status(StatusCodes.CREATED).json({ id: ingredient.id });
+            const result = await ingredientService.createRegister(ingredient);
+            if (result) {
+                res.status(StatusCodes.CREATED).json({ id: result.id });
             } else {
                 res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
             }
@@ -19,9 +24,15 @@ class IngredientController {
         }
     }
 
-    static async getAll(req: Request, res: Response, next: NextFunction) {
+    static async getAll(req: Request<{}, {}, {}, IngredientQueryProps>, res: Response, next: NextFunction) {
+        const { description, limit, page } = req.query;
+        const query: IngredientQueryProps = {
+            description: description || "",
+            limit: limit || 10,
+            page: page || 1
+        };
         try {
-            const ingredients = await ingredientService.getAll();
+            const ingredients = await ingredientService.getAll(query);
             if (ingredients) {
                 res.status(StatusCodes.OK).json(ingredients);
             } else {
@@ -33,10 +44,11 @@ class IngredientController {
     }
 
     static async getById(req: Request<{ id: string }>, res: Response, next: NextFunction) {
+        const { id } = req.params;
         try {
-            const ingredient = await ingredientService.getById(req.params.id);
-            if (ingredient) {
-                res.status(StatusCodes.OK).json(ingredient);
+            const result = await ingredientService.getById(id);
+            if (result) {
+                res.status(StatusCodes.OK).json(result);
             } else {
                 res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
             }
@@ -46,10 +58,16 @@ class IngredientController {
     }
 
     static async put(req: Request<{ id: string }, {}, IngredientCreate>, res: Response, next: NextFunction) {
+        const { id } = req.params;
+        const { description, value } = req.body;
+        const ingredient: IngredientCreate = {
+            description,
+            value
+        };
         try {
-            const ingredient = await ingredientService.update(req.params.id, req.body);
-            if (ingredient) {
-                res.status(StatusCodes.OK).json(ingredient);
+            const result = await ingredientService.update(id, ingredient);
+            if (result) {
+                res.status(StatusCodes.OK).json(result);
             } else {
                 res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
             }
@@ -59,8 +77,9 @@ class IngredientController {
     }
 
     static async del(req: Request<{ id: string }>, res: Response, next: NextFunction) {
+        const { id } = req.params;
         try {
-            const response = await ingredientService.destroy(req.params.id);
+            const response = await ingredientService.destroy(id);
             if (response) {
                 res.sendStatus(StatusCodes.OK);
             } else {

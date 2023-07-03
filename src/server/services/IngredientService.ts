@@ -1,5 +1,5 @@
 import { IngredientRepository } from "../../database/repository/IngredientRepository";
-import { IngredientCreate } from "../../models/Ingredient";
+import { IngredientCreate, IngredientQueryProps } from "../../models/Ingredient";
 
 class IngredientService {
 
@@ -7,8 +7,8 @@ class IngredientService {
         return await IngredientRepository.create(ingredient);
     }
 
-    async getAll() {
-        return await IngredientRepository.read();
+    async getAll(query: IngredientQueryProps) {
+        return await IngredientRepository.read(query);
     }
 
     async getById(id: string) {

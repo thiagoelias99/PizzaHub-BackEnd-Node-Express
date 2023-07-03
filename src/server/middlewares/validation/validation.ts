@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import { z, ZodError } from "zod";

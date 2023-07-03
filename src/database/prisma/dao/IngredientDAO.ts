@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { IngredientCreate } from "../../../models/Ingredient";
+import { IngredientCreate, IngredientQueryProps } from "../../../models/Ingredient";
 import { prismaClient } from "../PrismaClient";
 
 class IngredientDAO {
@@ -7,8 +7,18 @@ class IngredientDAO {
         return await prismaClient.ingredient.create({ data: ingredient });
     }
 
-    static async read() {
-        return await prismaClient.ingredient.findMany();
+    static async read(query: IngredientQueryProps) {
+        const { description, limit, page } = query;
+
+        console.log(query);
+
+        return await prismaClient.ingredient.findMany({
+            where: {
+                description: { contains: description }
+            },
+            take: limit,
+            skip: page ? page - 1 : 0
+        });
     }
 
     static async readById(id: string) {
