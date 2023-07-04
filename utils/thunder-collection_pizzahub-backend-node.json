@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "pizzahub-backend-node",
-    "dateExported": "2023-07-04T11:36:13.548Z",
+    "dateExported": "2023-07-04T21:51:01.550Z",
     "version": "1.1",
     "folders": [
         {
@@ -10,6 +10,13 @@
             "containerId": "",
             "created": "2023-07-03T19:45:06.530Z",
             "sortNum": 10000
+        },
+        {
+            "_id": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
+            "name": "Pizza",
+            "containerId": "",
+            "created": "2023-07-04T21:49:25.733Z",
+            "sortNum": 20000
         }
     ],
     "requests": [
@@ -22,12 +29,31 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-07-03T19:45:06.530Z",
-            "modified": "2023-07-03T23:30:11.696Z",
+            "modified": "2023-07-04T21:32:31.768Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"description\": \"Queijo\",\n  \"value\": 10.99,\n  \"teste\": \"teste\"\n}",
+                "raw": "{\n  \"description\": \"Queijo\",\n  \"value\": 10.99\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "70dd9819-a09f-49ae-8aef-9f302183c47b",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
+            "name": "Post",
+            "url": "http://localhost:3333/pizzas",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-07-04T21:49:25.733Z",
+            "modified": "2023-07-04T21:49:55.201Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"description\": \"Queijo\",\n  \"value\": 10.99\n}",
                 "form": []
             },
             "tests": []
@@ -41,7 +67,46 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-07-03T20:35:44.250Z",
-            "modified": "2023-07-04T11:33:18.286Z",
+            "modified": "2023-07-04T21:24:51.970Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "0f3b536b-5c5c-457f-836a-0984c02d5f01",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "asd",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "-2",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "description",
+                    "value": "que",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "bf6b2ce8-e812-48e2-a129-9dda1009b2ce",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
+            "name": "GetAll",
+            "url": "http://localhost:3333/pizzas",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-07-04T21:49:25.734Z",
+            "modified": "2023-07-04T21:50:04.482Z",
             "headers": [],
             "params": [
                 {
@@ -80,7 +145,21 @@
             "method": "GET",
             "sortNum": 30000,
             "created": "2023-07-03T20:45:20.764Z",
-            "modified": "2023-07-04T11:34:12.982Z",
+            "modified": "2023-07-04T21:32:50.870Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d6e46c44-63ea-4c2c-9042-b300915b9949",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
+            "name": "GetId",
+            "url": "http://localhost:3333/pizzas/9196d501-458b-4928-bd8f-c51167e0416e",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-07-04T21:49:25.735Z",
+            "modified": "2023-07-04T21:50:32.378Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -94,12 +173,31 @@
             "method": "PUT",
             "sortNum": 35000,
             "created": "2023-07-03T21:01:54.574Z",
-            "modified": "2023-07-03T21:05:07.691Z",
+            "modified": "2023-07-04T21:33:13.259Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"description\": \"Presunto Parma\",\n    \"value\": 79.99\n}",
+                "raw": "{\n    \"description\": \"Presunto Parma\",\n    \"value\": 80\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "acea9e4c-6b22-4453-8091-8b3fc84b39a0",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
+            "name": "Put",
+            "url": "http://localhost:3333/pizzas/9196d501-458b-4928-bd8f-c51167e0416e",
+            "method": "PUT",
+            "sortNum": 35000,
+            "created": "2023-07-04T21:49:25.736Z",
+            "modified": "2023-07-04T21:50:37.442Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"description\": \"Presunto Parma\",\n    \"value\": 80\n}",
                 "form": []
             },
             "tests": []
@@ -114,6 +212,20 @@
             "sortNum": 40000,
             "created": "2023-07-03T21:01:08.732Z",
             "modified": "2023-07-04T11:34:53.939Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "8477d913-24e9-488d-b87f-65dd7186b0be",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
+            "name": "Delete",
+            "url": "http://localhost:3333/pizzas/9196d501-458b-4928-bd8f-c51167e0416e",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-07-04T21:49:25.737Z",
+            "modified": "2023-07-04T21:50:44.525Z",
             "headers": [],
             "params": [],
             "tests": []

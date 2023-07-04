@@ -1,6 +1,7 @@
 import express from "express";
 
 import { router as IngredientsRouter } from "./ingredientsRouter";
+import { router as PizzaRouter } from "./PizzaRouter";
 // const StudentsRouter = require("./studentsRouter")
 // const CoursesRouter = require("./coursesRouter")
 // const WelcomeRoute = require("./welcome")
@@ -9,6 +10,7 @@ import { router as IngredientsRouter } from "./ingredientsRouter";
 const router = express.Router();
 
 router.use(IngredientsRouter);
+router.use(PizzaRouter);
 
 // router.use(WelcomeRoute);
 // router.use(StudentsRouter);
