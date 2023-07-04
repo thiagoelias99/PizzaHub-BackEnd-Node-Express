@@ -9,9 +9,6 @@ class IngredientDAO {
 
     static async read(query: IngredientQueryProps) {
         const { description, limit, page } = query;
-
-        console.log(query);
-
         return await prismaClient.ingredient.findMany({
             where: {
                 description: { contains: description }

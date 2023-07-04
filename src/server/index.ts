@@ -8,7 +8,7 @@ dotenv.config();
 const server = express();
 const port = process.env.PORT || 3333;
 
-import { router } from "./routes/ingredientsRouter";
+import { router } from "./routes";
 // import { errorHandler } from "./middlewares";
 // const {
 //     errorHandler

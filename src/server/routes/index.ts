@@ -1,6 +1,6 @@
 import express from "express";
 
-import * as IngredientsRouter from "./ingredientsRouter";
+import { router as IngredientsRouter } from "./ingredientsRouter";
 // const StudentsRouter = require("./studentsRouter")
 // const CoursesRouter = require("./coursesRouter")
 // const WelcomeRoute = require("./welcome")
@@ -8,7 +8,7 @@ import * as IngredientsRouter from "./ingredientsRouter";
 
 const router = express.Router();
 
-// router.use(IngredientsRouter);
+router.use(IngredientsRouter);
 
 // router.use(WelcomeRoute);
 // router.use(StudentsRouter);

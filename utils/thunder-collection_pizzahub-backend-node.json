@@ -1,35 +1,121 @@
 {
     "client": "Thunder Client",
     "collectionName": "pizzahub-backend-node",
-    "dateExported": "2023-07-03T19:43:25.163Z",
+    "dateExported": "2023-07-04T11:36:13.548Z",
     "version": "1.1",
     "folders": [
         {
-            "_id": "7f8b06d4-261a-4ecb-8420-0b57a8befc54",
+            "_id": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
             "name": "Ingredient",
             "containerId": "",
-            "created": "2023-07-02T23:20:20.244Z",
+            "created": "2023-07-03T19:45:06.530Z",
             "sortNum": 10000
         }
     ],
     "requests": [
         {
-            "_id": "74e54e43-058f-4553-8ad5-a51777ac8140",
-            "colId": "4cb6b0de-da49-4912-aa5a-c292243cfdb6",
-            "containerId": "7f8b06d4-261a-4ecb-8420-0b57a8befc54",
+            "_id": "4249d6f4-0609-4d51-b876-11609d136324",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
             "name": "Post",
             "url": "http://localhost:3333/ingredients",
             "method": "POST",
             "sortNum": 10000,
-            "created": "2023-07-02T23:20:29.504Z",
-            "modified": "2023-07-03T00:20:56.511Z",
+            "created": "2023-07-03T19:45:06.530Z",
+            "modified": "2023-07-03T23:30:11.696Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"description\": \"Presunto\",\n  \"value\": 59.99\n}",
+                "raw": "{\n  \"description\": \"Queijo\",\n  \"value\": 10.99,\n  \"teste\": \"teste\"\n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "d3f3ed7c-2f6d-4a76-8994-dae2f58fb54a",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
+            "name": "GetAll",
+            "url": "http://localhost:3333/ingredients",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-07-03T20:35:44.250Z",
+            "modified": "2023-07-04T11:33:18.286Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "0f3b536b-5c5c-457f-836a-0984c02d5f01",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "asd",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "-2",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "description",
+                    "value": "que",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "0ca8a6a7-821b-4069-9b50-4f1659c9368c",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
+            "name": "GetId",
+            "url": "http://localhost:3333/ingredients/75043524-b293-455f-9386-7a05907810db",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-07-03T20:45:20.764Z",
+            "modified": "2023-07-04T11:34:12.982Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0878d1e6-a87b-4bd9-9129-a3d3302bb288",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
+            "name": "Put",
+            "url": "http://localhost:3333/ingredients/75043524-b293-455f-9386-7a05907810db",
+            "method": "PUT",
+            "sortNum": 35000,
+            "created": "2023-07-03T21:01:54.574Z",
+            "modified": "2023-07-03T21:05:07.691Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"description\": \"Presunto Parma\",\n    \"value\": 79.99\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "4ab5e4a3-f5fe-43a0-a579-dd93400bcca0",
+            "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
+            "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
+            "name": "Delete",
+            "url": "http://localhost:3333/ingredients/e9e5aa03-9d8f-4334-ad28-caea15cb6ced",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-07-03T21:01:08.732Z",
+            "modified": "2023-07-04T11:34:53.939Z",
+            "headers": [],
+            "params": [],
             "tests": []
         }
     ]

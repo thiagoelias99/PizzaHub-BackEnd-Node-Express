@@ -31,7 +31,6 @@ export const validation: TValidation = (getAllSchemas) => async (req, res, next)
                     errors[fieldName] = error.message;
                 }
             });
-
             errorsResult[key] = errors;
         }
     });

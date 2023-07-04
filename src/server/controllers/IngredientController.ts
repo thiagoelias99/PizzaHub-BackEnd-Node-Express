@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import { z, ZodError } from "zod";
+import { queryValidation } from "../middlewares/validation/IngredientValidation";
 
 import { IngredientService } from "../services/IngredientService";
 import { IngredientCreate, IngredientQueryProps } from "../../models/Ingredient";
@@ -26,42 +27,8 @@ class IngredientController {
     }
 
     static async getAll(req: Request<{}, {}, {}, IngredientQueryProps>, res: Response, next: NextFunction) {
-        const schema = z.object({
-            page: z.string()
-                .transform((value, error) => {
-                    const parsed = Number(value);
-                    if (isNaN(parsed)) {
-                        error.addIssue({
-                            code: z.ZodIssueCode.custom,
-                            message: "Not a number",
-                        });
-                        return z.NEVER;
-                    }
-                    return parsed;
-                })
-                .refine(number => number > 0, { message: "Number must be greater than zero." })
-                .optional()
-                .default("1"),
-            limit: z.string()
-                .transform((value, error) => {
-                    const parsed = Number(value);
-                    if (isNaN(parsed)) {
-                        error.addIssue({
-                            code: z.ZodIssueCode.custom,
-                            message: "Not a number",
-                        });
-                        return z.NEVER;
-                    }
-                    return parsed;
-                })
-                .refine(number => number > 0, { message: "Number must be greater than zero." })
-                .optional()
-                .default("10"),
-            description: z.string().nonempty().default("").optional()
-        });
-
         try {
-            const validatedData: IngredientQueryProps = schema.parse(req.query);
+            const validatedData: IngredientQueryProps = queryValidation(req.query);
             const ingredients = await ingredientService.getAll(validatedData);
             if (ingredients) {
                 res.status(StatusCodes.OK).json(ingredients);
