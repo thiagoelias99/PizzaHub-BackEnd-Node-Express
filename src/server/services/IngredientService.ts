@@ -8,7 +8,7 @@ class IngredientService {
     }
 
     async getAll(query: IngredientQueryProps) {
-        return await IngredientRepository.read(query);
+        return await IngredientRepository.read(query);         
     }
 
     async getById(id: string) {

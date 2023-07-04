@@ -9,10 +9,7 @@ const server = express();
 const port = process.env.PORT || 3333;
 
 import { router } from "./routes";
-// import { errorHandler } from "./middlewares";
-// const {
-//     errorHandler
-// } = require("./middlewares");
+import { errorHandler } from "./middlewares";
 
 // CORS middleware configuration
 server.use(cors());
@@ -27,7 +24,7 @@ server.use(morgan("dev"));
 server.use(router);
 
 // Errors Handler middleware configuration
-// server.use(errorHandler);
+server.use(errorHandler);
 
 server.listen(port, () => {
     const date = new Date();

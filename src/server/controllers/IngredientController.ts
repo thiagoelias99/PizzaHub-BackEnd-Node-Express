@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
-import { z, ZodError } from "zod";
+import { ZodError } from "zod";
 import { queryValidation } from "../middlewares/validation/IngredientValidation";
 
 import { IngredientService } from "../services/IngredientService";
@@ -30,15 +30,9 @@ class IngredientController {
         try {
             const validatedData: IngredientQueryProps = queryValidation(req.query);
             const ingredients = await ingredientService.getAll(validatedData);
-            if (ingredients) {
-                res.status(StatusCodes.OK).json(ingredients);
-            } else {
-                res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
-            }
+            res.status(StatusCodes.OK).json(ingredients);
+            
         } catch (error) {
-            if (error instanceof ZodError) {
-                console.log(error.format());
-            }
             next(error);
         }
     }

@@ -1,7 +1,8 @@
 import { IngredientCreate } from "../../../models/Ingredient";
 import { validation } from "./validation";
-import { z } from "zod";
+import { ZodError, z } from "zod";
 import { RequestHandler } from "express";
+import { ParamsError } from "../../../errors";
 
 const bodyValidation: RequestHandler = validation((getSchema) => ({
     body: getSchema<IngredientCreate>(
@@ -55,7 +56,22 @@ function queryValidation(data: any) {
         description: z.string().nonempty().default("").optional()
     });
 
-    return schema.parse(data);
+    try {
+        const result = schema.parse(data);
+        return result;
+    } catch (error) {
+        if (error instanceof ZodError) {
+            const paramsError = new ParamsError();
+            error.issues.forEach(err => {
+                paramsError.addToErrorList(err.path.toString(), err.message);
+            });
+            throw paramsError;
+        }
+        throw error;
+    }
+
+
+
 }
 
 export {
