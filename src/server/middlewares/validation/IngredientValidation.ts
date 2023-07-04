@@ -20,19 +20,8 @@ const paramsValidation: RequestHandler = validation((getSchema) => ({
     ),
 }));
 
-const queryValidation: RequestHandler = validation((getSchema) => ({
-    query: getSchema<Partial<IngredientQueryProps>>(
-        z.object({
-            page: z.number().gt(0).default(1).optional(),
-            limit: z.number().gt(0).default(10).optional(),
-            description: z.string().nonempty().default("").optional()
-        })
-    ),
-}));
-
 export {
     bodyValidation,
-    paramsValidation,
-    queryValidation
+    paramsValidation
 };
 
