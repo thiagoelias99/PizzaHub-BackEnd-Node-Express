@@ -1,17 +1,17 @@
 import { IngredientCreate } from "../../../models/Ingredient";
 import { validation } from "./validation";
-import { ZodError, z } from "zod";
+import { z } from "zod";
 import { RequestHandler } from "express";
-import { ParamsError } from "../../../errors";
+import { validate } from "./validationWithResult";
 
-const bodyValidation: RequestHandler = validation((getSchema) => ({
-    body: getSchema<IngredientCreate>(
-        z.object({
-            description: z.string().nonempty(),
-            value: z.number().gt(0)
-        })
-    ),
-}));
+function bodyValidation(data: any): IngredientCreate {
+    const schema = z.object({
+        description: z.string().nonempty(),
+        value: z.number().gt(0)
+    });
+
+    return validate(schema, data);
+}
 
 const paramsValidation: RequestHandler = validation((getSchema) => ({
     params: getSchema<{ id: string }>(
@@ -56,19 +56,21 @@ function queryValidation(data: any) {
         description: z.string().nonempty().default("").optional()
     });
 
-    try {
-        const result = schema.parse(data);
-        return result;
-    } catch (error) {
-        if (error instanceof ZodError) {
-            const paramsError = new ParamsError();
-            error.issues.forEach(err => {
-                paramsError.addToErrorList(err.path.toString(), err.message);
-            });
-            throw paramsError;
-        }
-        throw error;
-    }
+    return validate(schema, data);
+
+    // try {
+    //     const result = schema.parse(data);
+    //     return result;
+    // } catch (error) {
+    //     if (error instanceof ZodError) {
+    //         const paramsError = new ParamsError();
+    //         error.issues.forEach(err => {
+    //             paramsError.addToErrorList(err.path.toString(), err.message);
+    //         });
+    //         throw paramsError;
+    //     }
+    //     throw error;
+    // }
 
 
 

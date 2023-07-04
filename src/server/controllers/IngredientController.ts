@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
-import { queryValidation } from "../middlewares/validation/IngredientValidation";
+import { bodyValidation, queryValidation } from "../middlewares/validation/IngredientValidation";
 
 import { IngredientService } from "../services/IngredientService";
 import { IngredientCreate, IngredientQueryProps } from "../../models/Ingredient";
@@ -15,7 +15,8 @@ class IngredientController {
             value
         };
         try {
-            const result = await ingredientService.createRegister(ingredient);
+            const validatedData: IngredientCreate = bodyValidation(ingredient);
+            const result = await ingredientService.createRegister(validatedData);
             if (result) {
                 res.status(StatusCodes.CREATED).json({ id: result.id });
             } else {
@@ -59,7 +60,8 @@ class IngredientController {
             value
         };
         try {
-            const result = await ingredientService.update(id, ingredient);
+            const validatedData: IngredientCreate = bodyValidation(ingredient);
+            const result = await ingredientService.update(id, validatedData);
             if (result) {
                 res.status(StatusCodes.OK).json(result);
             } else {
