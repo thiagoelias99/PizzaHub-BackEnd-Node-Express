@@ -6,7 +6,7 @@ interface IPizza {
     value: number,
     ingredients?: {
         id: string,
-        ingredient_quantity: string
+        ingredient_quantity: number
     }[]
 }
 

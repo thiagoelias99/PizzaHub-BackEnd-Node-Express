@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { IPizza, IPizzaCreate, IPizzaQueryProps } from "../../../models/Pizza";
 import { prismaClient } from "../PrismaClient";
 
@@ -16,14 +15,11 @@ class PizzaDAO {
             await prismaClient.pizzasXIngredients.create({
                 data: {
                     pizzaId: createdPizza.id,
-                    ingredientId: ingredient.id
+                    ingredientId: ingredient.id,
+                    ingredient_quantity: ingredient.ingredient_quantity
                 }
             });
         });
-
-
-
-
         return createdPizza;
     }
 
@@ -39,15 +35,35 @@ class PizzaDAO {
     }
 
     static async readById(id: string) {
-        return await prismaClient.pizza.findUnique({
+        const pizzaFromDB = await prismaClient.pizza.findUnique({
             where: {
                 id
             }
         });
+
+        const ingredientsFromPizza = await prismaClient.pizzasXIngredients.findMany({
+            where: {
+                pizzaId: id
+            }
+        });
+
+        const pizzaWithIngredients: IPizza = {
+            id: id,
+            description: pizzaFromDB?.description || "",
+            value: Number(pizzaFromDB?.value) || 0,
+            ingredients: ingredientsFromPizza.map(ingredient => {
+                return {
+                    id: ingredient.ingredientId,
+                    ingredient_quantity: Number(ingredient.ingredient_quantity)
+                };
+            })
+        };
+
+        return pizzaWithIngredients;
     }
 
     static async update(pizza: IPizza) {
-        return await prismaClient.pizza.update({
+        await prismaClient.pizza.update({
             where: {
                 id: pizza.id as string
             },
@@ -56,6 +72,19 @@ class PizzaDAO {
                 value: pizza.value
             }
         });
+
+        await prismaClient.pizzasXIngredients.deleteMany({ where: { pizzaId: pizza.id } });
+        pizza.ingredients?.forEach(async ingredient => {
+            await prismaClient.pizzasXIngredients.create({
+                data: {
+                    pizzaId: pizza.id,
+                    ingredientId: ingredient.id,
+                    ingredient_quantity: ingredient.ingredient_quantity
+                }
+            });
+        });
+
+        return this.readById(pizza.id);
     }
 
     static async destroy(id: string) {

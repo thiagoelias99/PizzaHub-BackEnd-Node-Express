@@ -43,14 +43,9 @@ class PizzaController {
     }
 
     static async put(req: Request<{ id: string }, {}, IPizzaCreate>, res: Response, next: NextFunction) {
-        const { id } = req.params;
-        const { description, value } = req.body;
-        const pizza: IPizzaCreate = {
-            description,
-            value
-        };
         try {
-            const validatedData: IPizzaCreate = bodyValidation(pizza);
+            const { id } = req.params;
+            const validatedData: IPizzaCreate = bodyValidation(req.body);
             const result = await pizzaService.update(id, validatedData);
             if (result) {
                 res.status(StatusCodes.OK).json(result);

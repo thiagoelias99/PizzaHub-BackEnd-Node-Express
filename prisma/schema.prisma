@@ -33,6 +33,7 @@ model PizzasXIngredients {
   pizzaId      String
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId String
+  ingredient_quantity Decimal @default(0)
   createdAt    DateTime   @default(now())
 
   @@id([pizzaId, ingredientId])
