@@ -3,7 +3,11 @@ import { IQueryParams } from "./QueryParams";
 interface IPizza {
     id: string,
     description: string,
-    value: number
+    value: number,
+    ingredients?: {
+        id: string,
+        ingredient_quantity: string
+    }[]
 }
 
 interface IPizzaCreate extends Omit<IPizza, "id"> {}

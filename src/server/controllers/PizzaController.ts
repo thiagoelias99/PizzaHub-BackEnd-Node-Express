@@ -8,19 +8,10 @@ const pizzaService = new PizzaService();
 
 class PizzaController {
     static async post(req: Request<{}, {}, IPizzaCreate>, res: Response, next: NextFunction) {
-        const { description, value } = req.body;
-        const pizza: IPizzaCreate = {
-            description,
-            value
-        };
         try {
-            const validatedData: IPizzaCreate = bodyValidation(pizza);
+            const validatedData: IPizzaCreate = bodyValidation(req.body);
             const result = await pizzaService.createRegister(validatedData);
-            if (result) {
-                res.status(StatusCodes.CREATED).json({ id: result.id });
-            } else {
-                res.sendStatus(StatusCodes.INTERNAL_SERVER_ERROR);
-            }
+            res.status(StatusCodes.CREATED).json({ id: result?.id });
         } catch (error) {
             next(error);
         }
@@ -31,7 +22,7 @@ class PizzaController {
             const validatedData: IPizzaQueryProps = queryValidation(req.query);
             const pizzas = await pizzaService.getAll(validatedData);
             res.status(StatusCodes.OK).json(pizzas);
-            
+
         } catch (error) {
             next(error);
         }

@@ -1,10 +1,30 @@
 import { Prisma } from "@prisma/client";
-import { IPizzaCreate, IPizzaQueryProps } from "../../../models/Pizza";
+import { IPizza, IPizzaCreate, IPizzaQueryProps } from "../../../models/Pizza";
 import { prismaClient } from "../PrismaClient";
 
 class PizzaDAO {
     static async create(pizza: IPizzaCreate) {
-        return await prismaClient.pizza.create({ data: pizza });
+        const createdPizza = await prismaClient.pizza.create({
+            data: {
+                description: pizza.description,
+                value: pizza.value,
+            }
+        });
+
+        await prismaClient.pizzasXIngredients.deleteMany({ where: { pizzaId: createdPizza.id } });
+        pizza.ingredients?.forEach(async ingredient => {
+            await prismaClient.pizzasXIngredients.create({
+                data: {
+                    pizzaId: createdPizza.id,
+                    ingredientId: ingredient.id
+                }
+            });
+        });
+
+
+
+
+        return createdPizza;
     }
 
     static async read(query: IPizzaQueryProps) {
@@ -26,13 +46,14 @@ class PizzaDAO {
         });
     }
 
-    static async update(pizza: Prisma.PizzaUpdateInput) {
+    static async update(pizza: IPizza) {
         return await prismaClient.pizza.update({
             where: {
                 id: pizza.id as string
             },
             data: {
-                ...pizza
+                description: pizza.description,
+                value: pizza.value
             }
         });
     }
