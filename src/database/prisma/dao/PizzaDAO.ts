@@ -6,7 +6,7 @@ class PizzaDAO {
         const createdPizza = await prismaClient.pizza.create({
             data: {
                 description: pizza.description,
-                value: pizza.value,
+                sellingPrice: pizza.sellingPrice
             }
         });
 
@@ -16,7 +16,7 @@ class PizzaDAO {
                 data: {
                     pizzaId: createdPizza.id,
                     ingredientId: ingredient.id,
-                    ingredient_quantity: ingredient.ingredient_quantity
+                    ingredientQuantity: ingredient.ingredient_quantity
                 }
             });
         });
@@ -50,11 +50,11 @@ class PizzaDAO {
         const pizzaWithIngredients: IPizza = {
             id: id,
             description: pizzaFromDB?.description || "",
-            value: Number(pizzaFromDB?.value) || 0,
+            sellingPrice: Number(pizzaFromDB?.sellingPrice) || 0,
             ingredients: ingredientsFromPizza.map(ingredient => {
                 return {
                     id: ingredient.ingredientId,
-                    ingredient_quantity: Number(ingredient.ingredient_quantity)
+                    ingredient_quantity: Number(ingredient.ingredientQuantity)
                 };
             })
         };
@@ -69,7 +69,7 @@ class PizzaDAO {
             },
             data: {
                 description: pizza.description,
-                value: pizza.value
+                sellingPrice: pizza.sellingPrice
             }
         });
 
@@ -79,7 +79,7 @@ class PizzaDAO {
                 data: {
                     pizzaId: pizza.id,
                     ingredientId: ingredient.id,
-                    ingredient_quantity: ingredient.ingredient_quantity
+                    ingredientQuantity: ingredient.ingredient_quantity
                 }
             });
         });

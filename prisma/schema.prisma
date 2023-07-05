@@ -11,30 +11,37 @@ datasource db {
 }
 
 model Ingredient {
-  id          String               @id @default(uuid())
-  description String
-  value       Decimal
-  pizzas      PizzasXIngredients[]
+  id           String               @id @default(uuid())
+  description  String
+  unit         String
+  valuePerUnit Decimal              @map("value_per_unit")
+  pizzas       PizzasXIngredients[]
+  deletedAt    DateTime?            @map("deleted_at")
+  createdAt    DateTime             @default(now()) @map("created_at")
+  updatedAt    DateTime             @updatedAt @map("updated_at")
 
   @@map("ingredients")
 }
 
 model Pizza {
-  id          String               @id @default(uuid())
-  description String
-  value       Decimal
-  ingredients PizzasXIngredients[]
+  id           String               @id @default(uuid())
+  description  String
+  sellingPrice Decimal              @map("selling_price")
+  ingredients  PizzasXIngredients[]
+  deletedAt    DateTime?            @map("deleted_at")
+  createdAt    DateTime             @default(now()) @map("created_at")
+  updatedAt    DateTime             @updatedAt @map("updated_at")
 
   @@map("pizzas")
 }
 
 model PizzasXIngredients {
-  pizza        Pizza      @relation(fields: [pizzaId], references: [id])
-  pizzaId      String
-  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
-  ingredientId String
-  ingredient_quantity Decimal @default(0)
-  createdAt    DateTime   @default(now())
+  pizza              Pizza      @relation(fields: [pizzaId], references: [id])
+  pizzaId            String     @map("pizza_id")
+  ingredient         Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId       String     @map("ingredient_id")
+  ingredientQuantity Decimal    @map("ingredient_quantity")
+  createdAt          DateTime   @default(now()) @map("created_at")
 
   @@id([pizzaId, ingredientId])
   @@map("pizzas_ingredients")

@@ -7,7 +7,8 @@ import { validate } from "./validationWithResult";
 function bodyValidation(data: any): IngredientCreate {
     const schema = z.object({
         description: z.string().nonempty(),
-        value: z.number().gt(0)
+        unit: z.string().nonempty(),
+        valuePerUnit: z.number().gt(0)
     });
 
     return validate(schema, data);
@@ -57,23 +58,6 @@ function queryValidation(data: any) {
     });
 
     return validate(schema, data);
-
-    // try {
-    //     const result = schema.parse(data);
-    //     return result;
-    // } catch (error) {
-    //     if (error instanceof ZodError) {
-    //         const paramsError = new ParamsError();
-    //         error.issues.forEach(err => {
-    //             paramsError.addToErrorList(err.path.toString(), err.message);
-    //         });
-    //         throw paramsError;
-    //     }
-    //     throw error;
-    // }
-
-
-
 }
 
 export {

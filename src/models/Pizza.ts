@@ -3,7 +3,7 @@ import { IQueryParams } from "./QueryParams";
 interface IPizza {
     id: string,
     description: string,
-    value: number,
+    sellingPrice: number,
     ingredients?: {
         id: string,
         ingredient_quantity: number

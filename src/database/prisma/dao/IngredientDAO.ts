@@ -1,10 +1,16 @@
 import { Prisma } from "@prisma/client";
-import { IngredientCreate, IngredientQueryProps } from "../../../models/Ingredient";
+import { Ingredient, IngredientCreate, IngredientQueryProps, IngredientUpdate } from "../../../models/Ingredient";
 import { prismaClient } from "../PrismaClient";
 
 class IngredientDAO {
     static async create(ingredient: IngredientCreate) {
-        return await prismaClient.ingredient.create({ data: ingredient });
+        return await prismaClient.ingredient.create({
+            data: {
+                description: ingredient.description,
+                unit: ingredient.unit,
+                valuePerUnit: ingredient.valuePerUnit,
+            }
+        });
     }
 
     static async read(query: IngredientQueryProps) {
@@ -26,21 +32,22 @@ class IngredientDAO {
         });
     }
 
-    static async update(ingredient: Prisma.IngredientUpdateInput) {
+    static async update(ingredient: IngredientUpdate) {
         return await prismaClient.ingredient.update({
             where: {
                 id: ingredient.id as string
             },
-            data: {
-                ...ingredient
-            }
+            data: ingredient
         });
     }
 
     static async destroy(id: string) {
-        return await prismaClient.ingredient.delete({
+        return await prismaClient.ingredient.update({
             where: {
                 id
+            },
+            data: {
+                deletedAt: new Date()
             }
         });
     }

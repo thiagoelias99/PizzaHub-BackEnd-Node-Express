@@ -1,5 +1,5 @@
 import { IngredientRepository } from "../../database/repository/IngredientRepository";
-import { IngredientCreate, IngredientQueryProps } from "../../models/Ingredient";
+import { IngredientCreate, IngredientQueryProps, IngredientUpdate } from "../../models/Ingredient";
 
 class IngredientService {
 
@@ -8,15 +8,15 @@ class IngredientService {
     }
 
     async getAll(query: IngredientQueryProps) {
-        return await IngredientRepository.read(query);         
+        return await IngredientRepository.read(query);
     }
 
     async getById(id: string) {
         return await IngredientRepository.readById(id);
     }
 
-    async update(id: string, ingredient: IngredientCreate) {
-        return await IngredientRepository.update({ id, ...ingredient });
+    async update(id: string, ingredient: IngredientUpdate) {
+        return await IngredientRepository.update({ ...ingredient, id });
     }
 
     async destroy(id: string) {

@@ -7,17 +7,13 @@ import { validate } from "./validationWithResult";
 function bodyValidation(data: any): IPizzaCreate {
     const schema = z.object({
         description: z.string().nonempty(),
-        value: z.number().gt(0),
+        sellingPrice: z.number().gt(0),
         ingredients:
             z.object({
                 id: z.string().uuid(),
                 ingredient_quantity: z.number().gt(0)
             }).array().optional()
-
     });
-
-    // console.log(schema.parse(data));
-
     return validate(schema, data);
 }
 

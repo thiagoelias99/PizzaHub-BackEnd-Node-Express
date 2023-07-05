@@ -9,13 +9,8 @@ const ingredientService = new IngredientService();
 
 class IngredientController {
     static async post(req: Request<{}, {}, IngredientCreate>, res: Response, next: NextFunction) {
-        const { description, value } = req.body;
-        const ingredient: IngredientCreate = {
-            description,
-            value
-        };
         try {
-            const validatedData: IngredientCreate = bodyValidation(ingredient);
+            const validatedData: IngredientCreate = bodyValidation(req.body);
             const result = await ingredientService.createRegister(validatedData);
             if (result) {
                 res.status(StatusCodes.CREATED).json({ id: result.id });
@@ -54,13 +49,8 @@ class IngredientController {
 
     static async put(req: Request<{ id: string }, {}, IngredientCreate>, res: Response, next: NextFunction) {
         const { id } = req.params;
-        const { description, value } = req.body;
-        const ingredient: IngredientCreate = {
-            description,
-            value
-        };
         try {
-            const validatedData: IngredientCreate = bodyValidation(ingredient);
+            const validatedData: IngredientCreate = bodyValidation(req.body);
             const result = await ingredientService.update(id, validatedData);
             if (result) {
                 res.status(StatusCodes.OK).json(result);

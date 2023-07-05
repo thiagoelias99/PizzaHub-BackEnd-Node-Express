@@ -1,4 +1,4 @@
-import { Ingredient, IngredientCreate, IngredientQueryProps } from "../../models/Ingredient";
+import { Ingredient, IngredientCreate, IngredientQueryProps, IngredientUpdate } from "../../models/Ingredient";
 
 import { dao } from "../prisma/dao/IngredientDAO";
 
@@ -16,7 +16,7 @@ class IngredientRepository {
         return await dao.readById(id);
     }
 
-    static async update(ingredient: Ingredient) {
+    static async update(ingredient: IngredientUpdate) {
         return await dao.update(ingredient);
     }
 

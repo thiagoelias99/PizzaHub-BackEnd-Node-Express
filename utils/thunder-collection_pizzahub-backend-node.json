@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "pizzahub-backend-node",
-    "dateExported": "2023-07-04T21:51:01.550Z",
+    "dateExported": "2023-07-05T13:20:42.592Z",
     "version": "1.1",
     "folders": [
         {
@@ -29,12 +29,12 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-07-03T19:45:06.530Z",
-            "modified": "2023-07-04T21:32:31.768Z",
+            "modified": "2023-07-05T13:08:36.028Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"description\": \"Queijo\",\n  \"value\": 10.99\n}",
+                "raw": "{\n  \"description\": \"Queijo Mussarela\",\n  \"unit\": \"kg\",\n  \"valuePerUnit\": 49.99\n}",
                 "form": []
             },
             "tests": []
@@ -48,12 +48,12 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-07-04T21:49:25.733Z",
-            "modified": "2023-07-04T21:49:55.201Z",
+            "modified": "2023-07-05T13:16:34.024Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"description\": \"Queijo\",\n  \"value\": 10.99\n}",
+                "raw": "{\n  \"description\": \"Pizza Presunto\",\n  \"sellingPrice\": 49.99,\n  \"ingredients\": [\n    {\n      \"id\": \"0e2cc16a-7056-45a3-94bf-e65b95b7df3b\",\n      \"ingredient_quantity\": 0.075\n    },\n        {\n      \"id\": \"2db3c545-7c3c-40fd-9265-550ec465b370\",\n      \"ingredient_quantity\": 0.01\n    }\n    ,\n        {\n      \"id\": \"5791018b-33c9-4ea0-8ec3-306601bffeae\",\n      \"ingredient_quantity\": 1\n    }\n    ,\n        {\n      \"id\": \"b7b10c9a-476d-4cc6-a9a2-456aeff83aca\",\n      \"ingredient_quantity\": 0.075\n    }\n  ]\n}",
                 "form": []
             },
             "tests": []
@@ -141,11 +141,11 @@
             "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
             "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
             "name": "GetId",
-            "url": "http://localhost:3333/ingredients/75043524-b293-455f-9386-7a05907810db",
+            "url": "http://localhost:3333/ingredients/0e2cc16a-7056-45a3-94bf-e65b95b7df3b",
             "method": "GET",
             "sortNum": 30000,
             "created": "2023-07-03T20:45:20.764Z",
-            "modified": "2023-07-04T21:32:50.870Z",
+            "modified": "2023-07-05T13:06:57.830Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -155,11 +155,11 @@
             "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
             "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
             "name": "GetId",
-            "url": "http://localhost:3333/pizzas/9196d501-458b-4928-bd8f-c51167e0416e",
+            "url": "http://localhost:3333/pizzas/489f44be-1bfd-4110-abb7-050f31df85f0",
             "method": "GET",
             "sortNum": 30000,
             "created": "2023-07-04T21:49:25.735Z",
-            "modified": "2023-07-04T21:50:32.378Z",
+            "modified": "2023-07-05T13:16:46.844Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -169,16 +169,16 @@
             "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
             "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
             "name": "Put",
-            "url": "http://localhost:3333/ingredients/75043524-b293-455f-9386-7a05907810db",
+            "url": "http://localhost:3333/ingredients/0e2cc16a-7056-45a3-94bf-e65b95b7df3b",
             "method": "PUT",
             "sortNum": 35000,
             "created": "2023-07-03T21:01:54.574Z",
-            "modified": "2023-07-04T21:33:13.259Z",
+            "modified": "2023-07-05T13:07:35.607Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"description\": \"Presunto Parma\",\n    \"value\": 80\n}",
+                "raw": "{\n  \"description\": \"Queijo Mussarela\",\n  \"unit\": \"kg\",\n  \"valuePerUnit\": 49.99\n}",
                 "form": []
             },
             "tests": []
@@ -188,16 +188,16 @@
             "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
             "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
             "name": "Put",
-            "url": "http://localhost:3333/pizzas/9196d501-458b-4928-bd8f-c51167e0416e",
+            "url": "http://localhost:3333/pizzas/489f44be-1bfd-4110-abb7-050f31df85f0",
             "method": "PUT",
             "sortNum": 35000,
             "created": "2023-07-04T21:49:25.736Z",
-            "modified": "2023-07-04T21:50:37.442Z",
+            "modified": "2023-07-05T13:18:28.402Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"description\": \"Presunto Parma\",\n    \"value\": 80\n}",
+                "raw": "{\n  \"description\": \"Pizza Presunto\",\n  \"sellingPrice\": 49.99,\n  \"ingredients\": [\n    {\n      \"id\": \"0e2cc16a-7056-45a3-94bf-e65b95b7df3b\",\n      \"ingredient_quantity\": 0.075\n    },\n    {\n      \"id\": \"2db3c545-7c3c-40fd-9265-550ec465b370\",\n      \"ingredient_quantity\": 0.01\n    },\n    {\n      \"id\": \"5791018b-33c9-4ea0-8ec3-306601bffeae\",\n      \"ingredient_quantity\": 0.5\n    },\n    {\n      \"id\": \"b7b10c9a-476d-4cc6-a9a2-456aeff83aca\",\n      \"ingredient_quantity\": 0.075\n    }\n  ]\n}",
                 "form": []
             },
             "tests": []
@@ -207,11 +207,11 @@
             "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
             "containerId": "38f25eff-f8a6-41c8-ad40-c5457c41a4f1",
             "name": "Delete",
-            "url": "http://localhost:3333/ingredients/e9e5aa03-9d8f-4334-ad28-caea15cb6ced",
+            "url": "http://localhost:3333/ingredients/0e2cc16a-7056-45a3-94bf-e65b95b7df3b",
             "method": "DELETE",
             "sortNum": 40000,
             "created": "2023-07-03T21:01:08.732Z",
-            "modified": "2023-07-04T11:34:53.939Z",
+            "modified": "2023-07-05T13:08:03.722Z",
             "headers": [],
             "params": [],
             "tests": []
@@ -221,11 +221,11 @@
             "colId": "fbe5bcb2-73b9-478a-bf70-365f0daa85f4",
             "containerId": "1f42d36c-8d3c-477f-9e43-f161a92974d6",
             "name": "Delete",
-            "url": "http://localhost:3333/pizzas/9196d501-458b-4928-bd8f-c51167e0416e",
+            "url": "http://localhost:3333/pizzas/bd10f862-41fb-432f-8590-c3a427f00f41",
             "method": "DELETE",
             "sortNum": 40000,
             "created": "2023-07-04T21:49:25.737Z",
-            "modified": "2023-07-04T21:50:44.525Z",
+            "modified": "2023-07-05T13:11:04.987Z",
             "headers": [],
             "params": [],
             "tests": []
