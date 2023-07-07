@@ -1,4 +1,4 @@
-import { IPizza, IPizzaCreate, IPizzaQueryProps } from "../../../models/Pizza";
+import { IPizza, IPizzaCreate, IPizzaDetails, IPizzaQueryProps } from "../../../models/Pizza";
 import { prismaClient } from "../PrismaClient";
 
 class PizzaDAO {
@@ -45,18 +45,46 @@ class PizzaDAO {
             where: {
                 pizzaId: id
             }
-        });
+        })
+            .then(data => {
+                return data.map(async ingredient => {
+                    const data = await prismaClient.ingredient.findUnique({
+                        where: {
+                            id: ingredient.ingredientId
+                        }
+                    });
+                    const ingredientQuantity = ingredient.ingredientQuantity;
+                    if (data) {
+                        return { ...data, ingredientQuantity };
+                    }
+                });
+            });
 
-        const pizzaWithIngredients: IPizza = {
+        const ingredients = await Promise.all(ingredientsFromPizza);
+        // .then(data => {
+        // });
+        console.log(ingredients);
+
+        const pizzaWithIngredients: IPizzaDetails = {
             id: id,
             description: pizzaFromDB?.description || "",
             sellingPrice: Number(pizzaFromDB?.sellingPrice) || 0,
-            ingredients: ingredientsFromPizza.map(ingredient => {
+            ingredients: ingredients.map(ingredient => {
                 return {
-                    id: ingredient.ingredientId,
-                    ingredient_quantity: Number(ingredient.ingredientQuantity)
+                    id: ingredient?.id,
+                    description: ingredient?.description,
+                    unit: ingredient?.unit,
+                    valuePerUnit: Number(ingredient?.valuePerUnit),
+                    ingredient_quantity: Number(ingredient?.ingredientQuantity)
                 };
             })
+            // ingredients: ingredientsFromPizza
+            // ingredients: ingredientsFromPizza.map(ingredient => {
+            // return {
+            //     id: ingredient.ingredientId,
+            //     ingredient_quantity: Number(ingredient.ingredientQuantity)
+            // };
+            // })
         };
 
         return pizzaWithIngredients;
